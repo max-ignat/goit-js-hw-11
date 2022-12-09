@@ -1,6 +1,6 @@
 import ApiService from './js/api-service';
 import { cardTemplate } from './js/cardTemplate';
-
+import { render } from './js/render';
 
 const refs = {
   inputEl: document.querySelector('#search-form'),
@@ -19,12 +19,12 @@ function onSubmitClick(event) {
   event.preventDefault();
   apiService.query = event.target.elements.searchQuery.value;
   apiService.resetPage();
-  apiService.fetchImages().then(renderMarkUp);
+  apiService.fetchImages().then(render);
 }
 
 function onLoadMore() {
-  apiService.fetchImages().then(renderMarkUp);
+  apiService.fetchImages().then(render);
 }
-function renderMarkUp(hits) {
+function render(hits) {
   refs.gallery.insertAdjacentHTML('beforeend', cardTemplate(hits));
 }
