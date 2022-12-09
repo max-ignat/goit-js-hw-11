@@ -1,0 +1,2 @@
+import { cardTemplate } from "./cardTemplate";
+
