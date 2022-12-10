@@ -1,4 +1,4 @@
-export const getItemsTemplate = ({
+export const cardTemplate = ({
   webformatURL,
   largeImageURL,
   tags,
