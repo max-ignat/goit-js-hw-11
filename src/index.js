@@ -44,12 +44,22 @@ function onSubmitClick(event) {
     }
     Notiflix.Notify.success(`Hooray! We found ${data.totalHits} images.`);
     render(data);
+    lightbox.refresh();
   });
 }
 
 function onLoadMore() {
-  apiService.fetchImages().then(render);
-  // lightbox.refresh();
+  apiService.fetchImages().then(data => {
+    if (data.length === 0) {
+      Notiflix.Notify.failure(
+        'Sorry, there are no images matching your search query. Please try again.'
+      );
+      return;
+    }
+    Notiflix.Notify.success(`Hooray! We found ${data.totalHits} images.`);
+    render(data);
+    lightbox.refresh();
+  });
 }
 function render(hits) {
   refs.gallery.insertAdjacentHTML('beforeend', cardTemplate(hits));
