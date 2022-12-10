@@ -61,8 +61,8 @@ function onLoadMore() {
     lightbox.refresh();
   });
 }
-function render(hits) {
-  refs.gallery.insertAdjacentHTML('beforeend', cardTemplate(hits));
+function render(data) {
+  refs.gallery.insertAdjacentHTML('beforeend', cardTemplate(data));
 }
 
 function clearRender() {

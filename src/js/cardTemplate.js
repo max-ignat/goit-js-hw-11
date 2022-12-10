@@ -1,4 +1,4 @@
-export const cardTemplate = ({
+export const getItemsTemplate = ({
   webformatURL,
   largeImageURL,
   tags,
@@ -7,7 +7,7 @@ export const cardTemplate = ({
   comments,
   downloads,
 }) => {
-  return `<a class="gallery__link" href="${largeImageURL}">
+  return`<a class="gallery__link" href="${largeImageURL}">
  <div class="photo-card" style="" >
   <img src="${webformatURL}" alt="${tags}" loading="lazy" class="gallery__image" width="345" />
    <div class="info" width="400">
@@ -25,8 +25,14 @@ export const cardTemplate = ({
     </p>
    </div>
  </div>
- </a>`;
-};
+ </a>`}
+
+
+
+
+
+
+
 
 // // export const getItemsTemplate = ({
 // //   webformatURL,
