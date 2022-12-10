@@ -5,7 +5,7 @@ export default class ApiService {
   }
 
   fetchImages() {
-    // console.log('before', this);
+    console.log('before', this);
     const BASE_URL =
       'https://pixabay.com/api/?key=31187962-e7df80d652d1f0f281ee6ae38';
     return fetch(
