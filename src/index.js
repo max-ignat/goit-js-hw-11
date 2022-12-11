@@ -56,8 +56,8 @@ function onLoadMore() {
       );
       return;
     }
-    Notiflix.Notify.success(`Hooray! We found ${data.totalHits} images.`);
-    render(data);
+    // Notiflix.Notify.success(`Hooray! We found ${data.totalHits} images.`);
+    // render(data);
     lightbox.refresh();
   });
 }
