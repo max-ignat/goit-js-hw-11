@@ -1,8 +1,6 @@
-import { cardTemplate } from "./cardTemplate";
-
-const gallery = document.querySelector('.gallery');
+import { cardTemplate } from './cardTemplate';
 
 export function render(hits) {
   const markup = hits.map(cardTemplate).join('');
-  return gallery.insertAdjacentHTML('beforeend', markup);
+  return refs.gallery.insertAdjacentHTML('beforeend', markup);
 }
