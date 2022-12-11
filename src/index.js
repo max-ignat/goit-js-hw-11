@@ -3,7 +3,7 @@ import Notiflix from 'notiflix';
 import { cardTemplate } from './js/cardTemplate';
 import { render } from './js/render';
 import SimpleLightbox from 'simplelightbox';
-// import './sass/index.scss';
+import './sass/index.scss';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 
 const lightbox = new SimpleLightbox('.gallery a', {
@@ -55,7 +55,7 @@ class ApiService {
   }
 }
 
-console.log('ApiService', ApiService);
+
 
 const apiService = new ApiService();
 
@@ -98,9 +98,9 @@ function onLoadMore() {
     lightbox.refresh();
   });
 }
-function render(data) {
-  refs.gallery.insertAdjacentHTML('beforeend', cardTemplate(data));
-}
+// function render(data) {
+//   refs.gallery.insertAdjacentHTML('beforeend', cardTemplate(data));
+// }
 
 function clearRender() {
   refs.gallery.innerHTML = '';
