@@ -1,4 +1,4 @@
-export default class ApiService {
+export class ApiService {
   constructor() {
     this.searchQuery = '';
     this.page = 1;

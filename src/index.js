@@ -1,4 +1,4 @@
-import ApiService from './js/api-service';
+import * as ApiService from './js/api-service';
 import Notiflix from 'notiflix';
 import { cardTemplate } from './js/cardTemplate';
 import { render } from './js/render';
