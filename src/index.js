@@ -1,16 +1,16 @@
 import ApiService from './js/api-service';
-import Notiflix from 'notiflix';
+// import Notiflix from 'notiflix';
 import { cardTemplate } from './js/cardTemplate';
 import { render } from './js/render';
-import SimpleLightbox from 'simplelightbox';
+// import SimpleLightbox from 'simplelightbox';
 import './sass/index.scss';
-import 'simplelightbox/dist/simple-lightbox.min.css';
+// import 'simplelightbox/dist/simple-lightbox.min.css';
 // import './css/simplelight-box.css';
-const lightbox = new SimpleLightbox('.gallery a', {
-  captionsData: 'alt',
-  captionDelay: 250,
-  scrollZoom: false,
-});
+// const lightbox = new SimpleLightbox('.gallery a', {
+//   captionsData: 'alt',
+//   captionDelay: 250,
+//   scrollZoom: false,
+// });
 
 const refs = {
   inputEl: document.querySelector('#search-form'),
@@ -31,34 +31,37 @@ function onSubmitClick(event) {
 
   apiService.query = event.target.elements.searchQuery.value;
   if (apiService.query.trim() === '') {
-    return Notiflix.Notify.failure('Please entrer search query');
+    return ;
+    // return Notiflix.Notify.failure('Please entrer search query');
   }
   apiService.resetPage();
 
   apiService.fetchImages().then(data => {
     if (data.length === 0) {
-      Notiflix.Notify.failure(
-        'Sorry, there are no images matching your search query. Please try again.'
+      console.log('mistake'
       );
+      // Notiflix.Notify.failure(
+      //   'Sorry, there are no images matching your search query. Please try again.'
+      // );
       return;
     }
-    Notiflix.Notify.success(`Hooray! We found ${data.totalHits} images.`);
+    console.log('succes');
+    // Notiflix.Notify.success(`Hooray! We found ${data.totalHits} images.`);
     render(data);
-    lightbox.refresh();
+    // lightbox.refresh();
   });
 }
 
 function onLoadMore() {
   apiService.fetchImages().then(data => {
     if (data.length === 0) {
-      Notiflix.Notify.failure(
-        'Sorry, there are no images matching your search query. Please try again.'
-      );
+      console.log('mistake');
       return;
     }
-    Notiflix.Notify.success(`Hooray! We found ${data.totalHits} images.`);
+    console.log('succes');
+    // Notiflix.Notify.success(`Hooray! We found ${data.totalHits} images.`);
     render(data);
-    lightbox.refresh();
+    // lightbox.refresh();
   });
 }
 function render(data) {
