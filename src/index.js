@@ -1,70 +1,70 @@
-import ApiService from './js/api-service';
-import Notiflix from 'notiflix';
-import { cardTemplate } from './js/cardTemplate';
-import { render } from './js/render';
-import SimpleLightbox from 'simplelightbox';
-import './sass/index.scss';
-import 'simplelightbox/dist/simple-lightbox.min.css';
-// import './css/simplelight-box.css';
-const lightbox = new SimpleLightbox('.gallery a', {
-  captionsData: 'alt',
-  captionDelay: 250,
-  scrollZoom: false,
-});
+// import ApiService from './js/api-service';
+// import Notiflix from 'notiflix';
+// import { cardTemplate } from './js/cardTemplate';
+// import { render } from './js/render';
+// import SimpleLightbox from 'simplelightbox';
+// import './sass/index.scss';
+// import 'simplelightbox/dist/simple-lightbox.min.css';
 
-const refs = {
-  inputEl: document.querySelector('#search-form'),
+// const lightbox = new SimpleLightbox('.gallery a', {
+//   captionsData: 'alt',
+//   captionDelay: 250,
+//   scrollZoom: false,
+// });
 
-  submitBtn: document.querySelector('button'),
-  gallery: document.querySelector('.gallery'),
-  loadMoreBtn: document.querySelector('.load-more'),
-};
+// const refs = {
+//   inputEl: document.querySelector('#search-form'),
 
-const apiService = new ApiService();
+//   submitBtn: document.querySelector('button'),
+//   gallery: document.querySelector('.gallery'),
+//   loadMoreBtn: document.querySelector('.load-more'),
+// };
 
-refs.inputEl.addEventListener('submit', onSubmitClick);
-refs.loadMoreBtn.addEventListener('click', onLoadMore);
+// const apiService = new ApiService();
 
-function onSubmitClick(event) {
-  event.preventDefault();
-  clearRender();
+// refs.inputEl.addEventListener('submit', onSubmitClick);
+// refs.loadMoreBtn.addEventListener('click', onLoadMore);
 
-  apiService.query = event.target.elements.searchQuery.value;
-  if (apiService.query.trim() === '') {
-    return Notiflix.Notify.failure('Please entrer search query');
-  }
-  apiService.resetPage();
+// function onSubmitClick(event) {
+//   event.preventDefault();
+//   clearRender();
 
-  apiService.fetchImages().then(data => {
-    if (data.length === 0) {
-      Notiflix.Notify.failure(
-        'Sorry, there are no images matching your search query. Please try again.'
-      );
-      return;
-    }
-    Notiflix.Notify.success(`Hooray! We found ${data.totalHits} images.`);
-    render(data);
-    lightbox.refresh();
-  });
-}
+//   apiService.query = event.target.elements.searchQuery.value;
+//   if (apiService.query.trim() === '') {
+//     return Notiflix.Notify.failure('Please entrer search query');
+//   }
+//   apiService.resetPage();
 
-function onLoadMore() {
-  apiService.fetchImages().then(data => {
-    if (data.length === 0) {
-      Notiflix.Notify.failure(
-        'Sorry, there are no images matching your search query. Please try again.'
-      );
-      return;
-    }
-    Notiflix.Notify.success(`Hooray! We found ${data.totalHits} images.`);
-    render(data);
-    lightbox.refresh();
-  });
-}
-function render(data) {
-  refs.gallery.insertAdjacentHTML('beforeend', cardTemplate(data));
-}
+//   apiService.fetchImages().then(data => {
+//     if (data.length === 0) {
+//       Notiflix.Notify.failure(
+//         'Sorry, there are no images matching your search query. Please try again.'
+//       );
+//       return;
+//     }
+//     Notiflix.Notify.success(`Hooray! We found ${data.totalHits} images.`);
+//     render(data);
+//     lightbox.refresh();
+//   });
+// }
 
-function clearRender() {
-  refs.gallery.innerHTML = '';
-}
+// function onLoadMore() {
+//   apiService.fetchImages().then(data => {
+//     if (data.length === 0) {
+//       Notiflix.Notify.failure(
+//         'Sorry, there are no images matching your search query. Please try again.'
+//       );
+//       return;
+//     }
+//     Notiflix.Notify.success(`Hooray! We found ${data.totalHits} images.`);
+//     render(data);
+//     lightbox.refresh();
+//   });
+// }
+// function render(data) {
+//   refs.gallery.insertAdjacentHTML('beforeend', cardTemplate(data));
+// }
+
+// function clearRender() {
+//   refs.gallery.innerHTML = '';
+// }
