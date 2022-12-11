@@ -21,6 +21,7 @@ const lightbox = new SimpleLightbox('.gallery a', {
 };
 
 class ApiService {
+  
   constructor() {
     this.searchQuery = '';
     this.page = 1;
@@ -54,6 +55,7 @@ class ApiService {
   }
 }
 
+console.log('ApiService', ApiService);
 
 const apiService = new ApiService();
 
