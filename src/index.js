@@ -1,4 +1,4 @@
-import * as ApiService from './js/api-service';
+// import * as ApiService from './js/api-service';
 import Notiflix from 'notiflix';
 import { cardTemplate } from './js/cardTemplate';
 import { render } from './js/render';
@@ -12,7 +12,7 @@ const lightbox = new SimpleLightbox('.gallery a', {
   scrollZoom: false,
 });
 
-export const refs = {
+ const refs = {
   inputEl: document.querySelector('#search-form'),
 
   submitBtn: document.querySelector('button'),
