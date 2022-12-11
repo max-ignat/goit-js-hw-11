@@ -3,7 +3,7 @@ import Notiflix from 'notiflix';
 import { cardTemplate } from './js/cardTemplate';
 import { render } from './js/render';
 import SimpleLightbox from 'simplelightbox';
-import './sass/index.scss';
+// import './sass/index.scss';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 
 const lightbox = new SimpleLightbox('.gallery a', {
