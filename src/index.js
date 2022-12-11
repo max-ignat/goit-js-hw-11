@@ -12,7 +12,7 @@ const lightbox = new SimpleLightbox('.gallery a', {
   scrollZoom: false,
 });
 
-const refs = {
+export const refs = {
   inputEl: document.querySelector('#search-form'),
 
   submitBtn: document.querySelector('button'),
@@ -56,7 +56,7 @@ function onLoadMore() {
       );
       return;
     }
-    // Notiflix.Notify.success(`Hooray! We found more ${data.totalHits} images.`);
+    Notiflix.Notify.success(`Hooray! We found more ${data.totalHits} images.`);
     render(data);
     lightbox.refresh();
   });
