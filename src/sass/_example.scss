@@ -17,6 +17,12 @@ a {
   text-decoration: none;
 }
 
+.search-form button:hover,
+.search-form button:focus {
+  background-color: rgb(180, 180, 180);
+  transition: all 0.3s;
+}
+
 .search-form {
   background-color: #6a5acd;
   z-index: 9;
@@ -32,7 +38,7 @@ a {
 
 .search-form input {
   position: absolute;
-  width: 350px;
+  width: 305px;
   height: 40px;
   padding: 10px 11px;
   border: 1px solid rgba(255, 255, 255, 0.3);
@@ -60,6 +66,7 @@ a {
 .load-more {
   width: 110px;
   height: 30px;
+  margin-bottom: 25px;
   border-radius: 15px;
   border-color: #6a5acd;
   color: white;
@@ -75,6 +82,16 @@ a {
   flex-wrap: wrap;
   justify-content: center;
 
+}
+
+.gallery__link:hover,
+.gallery__link:focus {
+  transform: scale(1.05);
+  
+}
+
+.gallery__link{
+  transition: all 0.3s;
 }
 
 .info {
@@ -104,6 +121,32 @@ a {
   object-fit: cover;
   height: 260px;
 }
+
+.gallery-container {
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-bottom: 25px;
+
+  @media screen and (min-width: 480px) {
+    width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  @media screen and (min-width: 768px) {
+    width: 768px;
+  }
+
+  @media screen and (min-width: 1200px) {
+    width: 1200px;
+  }
+
+  @media screen and (min-width: 1440px) {
+    width: 1440px;
+  }
+}
+
+
 
 .info {
   margin: 5px;

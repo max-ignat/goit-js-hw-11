@@ -57,7 +57,7 @@ function onSubmitClick(event) {
         if (apiService.page > totalPages) {
           refs.loadMoreBtn.classList.add('is-hidden');
 
-          ifError();
+          // ifError();
           hideButton();
           return;
         }
