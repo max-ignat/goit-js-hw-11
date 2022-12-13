@@ -1,25 +1,28 @@
-const axios = require('axios');
+import axios from 'axios';
 import Notiflix from 'notiflix';
+axios.defaults.baseURL = 'https://pixabay.com/api/';
+const KEY = '26822311-a0e098b2f5216f801fe0726a9';
+
 export default class ApiService {
   constructor() {
     this.searchQuery = '';
     this.page = 1;
   }
 
-  fetchImages() {
-    // console.log('before', this);
-    const BASE_URL =
-      'https://pixabay.com/api/?key=31187962-e7df80d652d1f0f281ee6ae38';
-    return fetch(
-      `${BASE_URL}&q=${this.searchQuery}&&image_type=photo&orientation=horizontal&safesearch=true&page=${this.page}&per_page=40`
-    )
-      .then(response => response.json())
-      .then(data => {
-        this.page += 1;
-        // console.log('data.totalHits', data.totalHits)
-        return data;
-      })
-      .catch(error => Notiflix.Notify.failure('Ups something wrong'));
+  async fetchImages() {
+    try {
+      const response = await axios.get(
+        `?key=${KEY}&q=${this.searchQuery}&&image_type=photo&orientation=horizontal&safesearch=true&page=${this.page}&per_page=40`
+      );
+      this.page += 1;
+
+      // return console.log(response.data.hits);
+      return response;
+    } catch {
+      Notiflix.Notify.failure(
+        'Ups something went wrong. Please contact your admin'
+      );
+    }
   }
 
   resetPage() {

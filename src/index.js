@@ -1,6 +1,5 @@
 import ApiService from './js/api-service';
 import Notiflix from 'notiflix';
-// import { cardTemplate } from './js/cardTemplate';
 import { render } from './js/render';
 import SimpleLightbox from 'simplelightbox';
 import './sass/index.scss';
@@ -20,43 +19,9 @@ const refs = {
   loadMoreBtn: document.querySelector('.load-more'),
 };
 const perPage = 40;
-// class ApiService {
-
-//   constructor() {
-//     this.searchQuery = '';
-//     this.page = 1;
-//   }
-
-//   fetchImages() {
-//     console.log('before', this);
-//     const BASE_URL =
-//       'https://pixabay.com/api/?key=31187962-e7df80d652d1f0f281ee6ae38';
-//     return fetch(
-//       `${BASE_URL}&q=${this.searchQuery}&&image_type=photo&orientation=horizontal&safesearch=true&page=${this.page}&per_page=30`
-//     )
-//       .then(response => response.json())
-//       .then(data => {
-//         this.page += 1;
-
-//         return data.hits;
-//       })
-//       .catch(error => console.log(error));
-//   }
-
-//   resetPage() {
-//     this.page = 1;
-//   }
-//   get query() {
-//     return this.searchQuery;
-//   }
-
-//   set query(newQuery) {
-//     this.searchQuery = newQuery;
-//   }
-// }
 
 const apiService = new ApiService();
-console.log(apiService.page);
+// console.log(apiService.page);
 refs.inputEl.addEventListener('submit', onSubmitClick);
 refs.loadMoreBtn.addEventListener('click', onLoadMore);
 
@@ -69,42 +34,55 @@ function onSubmitClick(event) {
     return Notiflix.Notify.failure('Please entrer search query');
   }
   apiService.resetPage();
-
-  apiService.fetchImages().then(data => {
-    if (data.hits.length === 0) {
+// ..............................................................................................................
+  apiService.fetchImages().then(response => {
+    if (response.data.hits.length === 0) {
       Notiflix.Notify.failure(
         'Sorry, there are no images matching your search query. Please try again.'
       );
       return;
     }
-    if (data.totalHits === 0) {
-      ifError();
+      if (response.data.totalHits === 0) {
+        ifError();
+      }
+      Notiflix.Notify.success(
+        `Hooray! We found ${response.data.totalHits} images.`
+      );
+      render(response);
+      showButton();
+      lightbox.refresh();
+    
+
+        const totalPages = Math.ceil(response.data.totalHits / perPage);
+        if (apiService.page > totalPages) {
+          refs.loadMoreBtn.classList.add('is-hidden');
+
+          ifError();
+          hideButton();
+          return;
+        }
+      });
+      // console.log("apiService.fetchImages in INDEX", apiService.fetchImages)
     }
-    Notiflix.Notify.success(`Hooray! We found ${data.totalHits} images.`);
-    render(data);
-    lightbox.refresh();
-  });
-}
 
 function onLoadMore() {
-  apiService.fetchImages().then(data => {
-    if (data.length === 0) {
-      Notiflix.Notify.failure(
-        'Sorry, there are no images matching your search query. Please try again.'
-      );
+  apiService.fetchImages().then(response => {
+    // console.log('response in onloadMore', response);
+    if (response.data.hits.length === 0) {
+      ifError();
       return;
     }
- render(data);
+    render(response);
     lightbox.refresh();
-    const totalPages = Math.ceil(data.totalHits / perPage);
+    const totalPages = Math.ceil(response.data.totalHits / perPage);
 
     if (apiService.page > totalPages) {
       refs.loadMoreBtn.classList.add('is-hidden');
+
       ifError();
+
       return;
     }
-
-   
   });
 }
 
@@ -120,4 +98,7 @@ function ifError() {
 
 function hideButton() {
   refs.loadMoreBtn.classList.add('is-hidden');
+}
+function showButton() {
+  refs.loadMoreBtn.classList.remove('is-hidden');
 }
