@@ -35,7 +35,7 @@ function onSubmitClick(event) {
   }
   apiService.resetPage();
 // ..............................................................................................................
-  apiService.fetchImages().then(response => {
+  apiService.searchImages().then(response => {
     if (response.data.hits.length === 0) {
       Notiflix.Notify.failure(
         'Sorry, there are no images matching your search query. Please try again.'
@@ -62,17 +62,20 @@ function onSubmitClick(event) {
           return;
         }
       });
-      // console.log("apiService.fetchImages in INDEX", apiService.fetchImages)
+      // console.log("apiService.fetchImages in INDEX", apiService.searchImages())
     }
 
-function onLoadMore() {
-  apiService.fetchImages().then(response => {
+async function onLoadMore() {
+  
+  await apiService.searchImages().then(response => {
     // console.log('response in onloadMore', response);
     if (response.data.hits.length === 0) {
       ifError();
       return;
     }
+
     render(response);
+    // console.log('+');
     lightbox.refresh();
     const totalPages = Math.ceil(response.data.totalHits / perPage);
 
@@ -80,11 +83,15 @@ function onLoadMore() {
       refs.loadMoreBtn.classList.add('is-hidden');
 
       ifError();
-
-      return;
+      
+      return ;
     }
   });
 }
+
+// console.log('onLoadMore', onLoadMore());
+
+
 
 function clearRender() {
   refs.gallery.innerHTML = '';
